@@ -1,0 +1,48 @@
+- Homepage
+    -Foto generica de hospital
+    -Parte superior com opção de acesso de paciente, médico e adm
+        -Fotos genericas de personagem para cada opção
+        -Após acessar uma opção, disponibilizar o login ou cadastro
+        -Após cadastro ou acesso disponibilizar botão de solicitar consulta
+- Login e Criar Conta/Models (User e Auth)
+    -Paciente
+        -ID
+        -Nome, Email, Senha, Data Nascimento 
+        -CPF(Unique)
+        -Sexo
+        -Celular
+        -Endereço (Solicitar apenas o Cep e o numero)
+        -Data Cadastro
+    -Médico
+        -ID
+        -Nome,Email, Senha, Data Nascimento
+        -CPF (Unique)
+        -Sexo
+        -Endereço (Solicitar apenas o Cep e o numero)
+        -Data Admissão
+        -Especialidade (Clínico Geral, Pediatra)
+        -Status(Em Atividade, Ferias, Desligado)
+    -Consulta
+        -ID Consulta
+        -ID Paciente
+        -ID Médico
+
+- Acessos
+    -Acesso ADM
+        -Exibir quantidade de médicos, pacientes
+        -Página de médicos 
+            -Registro dos médicos e a opção de registrar e remover
+        -Página de pacientes 
+            -conter uma opção para os que estão em exames e os que já finalizaram
+        -Página de consulta
+            -Opção de verificar historico de consulta
+            -Opção de verificar consultas ativas
+    -Acesso Paciente
+        -Solicitar consulta(Informar sintomas)
+        -Historico de consulta
+    -Acesso Médico
+        -Cronograma
+        -Editar consulta(Permitir encerrar ou escrever algo sobre a consulta para ficar registrado)
+
+- Possibilidades
+    -Gerar um PDF após o encerramento da consulta como todo os procedimentos
