@@ -26,6 +26,11 @@
         -ID Consulta
         -ID Paciente
         -ID Médico
+        -Data Consulta
+        -Inicio/Fim consulta
+        -Status(Agendada,Confirmada,Em andamento,Concluída,Cancelada pelo paciente,Cancelada pelo médico,Não compareceu (falta))
+        -Diagnóstico
+        -Tipo de consulta
 
 - Acessos
     -Acesso ADM
@@ -37,12 +42,18 @@
         -Página de consulta
             -Opção de verificar historico de consulta
             -Opção de verificar consultas ativas
+        -Criar/Remover consulta
+
     -Acesso Paciente
-        -Solicitar consulta(Informar sintomas)
+        -Solicitar consulta(Informar sintomas)(Talvez criar um calendário para melhor visualização )
         -Historico de consulta
+        -Cancelar/Reagendar consulta (com prazo mínimo)
+        -Avaliar atendimento após consulta
     -Acesso Médico
         -Cronograma
-        -Editar consulta(Permitir encerrar ou escrever algo sobre a consulta para ficar registrado)
+        -Editar consulta(Permitir escrever algo sobre a consulta para ficar registrado)
+        -Cada observação ficar salva para futuras análises
+        -Iniciar/Encerrar consulta
 
 - Possibilidades
     -Gerar um PDF após o encerramento da consulta como todo os procedimentos
