@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from datetime import date
-# Create your models here.
+
+
 class Paciente(models.Model):
 
     SEXO_CHOICES=[
@@ -11,18 +12,17 @@ class Paciente(models.Model):
         ('O', 'Outro'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='paciente')
+    nome_completo = models.CharField(max_length=200) 
     foto= models.ImageField(upload_to='foto', blank=True, null=True)
     cpf = models.CharField(max_length=11, unique=True,
         validators=[RegexValidator(r'^\d{11}$', 'CPF deve conter 11 dígitos')]
     )
     data_nascimento = models.DateField()
     sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
-    celular = models.CharField(
-        max_length=11,
+    celular = models.CharField(max_length=11,
         validators=[RegexValidator(r'^\d{10,11}$', 'Celular deve conter 10 ou 11 dígitos')]
     )
-    cep = models.CharField(
-        max_length=8,
+    cep = models.CharField(max_length=8,
         validators=[RegexValidator(r'^\d{8}$', 'CEP deve conter 8 dígitos')]
     )
     numero = models.CharField(max_length=10)
@@ -34,11 +34,7 @@ class Paciente(models.Model):
         ordering = ['-data_cadastro']
     
     def __str__(self):
-        return f"{self.user.get_full_name()} - {self.cpf}"
-    
-    @property
-    def nome_completo(self):
-        return self.user.get_full_name()
+        return f"{self.nome_completo} - {self.cpf}"
 
     @property
     def email(self):
