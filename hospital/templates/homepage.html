@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+HomePage hospital
+{% endblock %}
+
+{% block content %}
+    <header class="min-h-screen bg-blue-950 bg-opacity-75 showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat" style="background-image: url('{% static 'imagens/recepcao.jpg' %}') ;">
+        <div>
+            <!--<h1 class="font-semibold text-4xl md:text-5xl w-10/12 md:w-3/4 text-center" >
+                Gerenciamento Hospital
+            </h1>-->
+
+
+        </div>
+    </header>
+
+    <section class="py-16 bg-blue-950">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- Admin -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-blue-600 h-64 flex items-center justify-center">
+                        <img src="{% static 'imagens/admin.png' %}" alt="Avatar Admin" class="w-40 h-40">
+                    </div>
+                    <div class="bg-gray-100 py-4 text-center">
+                        <h3 class="text-xl font-semibold text-gray-600 uppercase tracking-wide">Admin</h3>
+                    </div>
+                    <a href=" #" class="block bg-black py-4 text-center hover:bg-gray-800 transition-colors">
+                        <span class="text-white text-lg font-medium">Acessar</span>
+                    </a>
+                </div>
+
+                <!-- Médico -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-slate-400 h-64 flex items-center justify-center">
+                        <img src="{% static 'imagens/medico.png' %}" alt="Avatar Medico" class="w-40 h-40">
+                    </div>
+                    <div class="bg-gray-100 py-4 text-center">
+                        <h3 class="text-xl font-semibold text-gray-600 uppercase tracking-wide">Médico</h3>
+                    </div>
+                    <a href="#" class="block bg-black py-4 text-center hover:bg-gray-800 transition-colors">
+                        <span class="text-white text-lg font-medium">Acessar</span>
+                    </a>
+                </div>
+
+                <!-- Paciente -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                    <div class="bg-teal-500 h-64 flex items-center justify-center">
+                        <img src="{% static 'imagens/paciente.png' %}" alt="Avatar Paciente" class="w-40 h-40">
+                    </div>
+                    <div class="bg-gray-100 py-4 text-center">
+                        <h3 class="text-xl font-semibold text-gray-600 uppercase tracking-wide">Paciente</h3>
+                    </div>
+                    <a href="#" class="block bg-black py-4 text-center hover:bg-gray-800 transition-colors">
+                        <span class="text-white text-lg font-medium">Acessar</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="px-5 py-10">
+        <ul class="flex justify-between items-center>">
+            <li>© 2026</li>
+            <li>Feito com Python (Django)</li>
+            <li>Guilherme</li>
+        </ul>
+    </footer>
+{% endblock %}
