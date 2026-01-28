@@ -13,7 +13,8 @@ class Paciente(models.Model):
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='paciente')
     nome_completo = models.CharField(max_length=200) 
-    foto= models.ImageField(upload_to='foto_perfil', blank=True, null=True)
+    foto= models.ImageField(upload_to='foto_perfil', blank=True, null=True,
+                            default='static/imagens/default-perfil.jpg')
     cpf = models.CharField(max_length=11, unique=True,
         validators=[RegexValidator(r'^\d{11}$', 'CPF deve conter 11 dígitos')]
     )

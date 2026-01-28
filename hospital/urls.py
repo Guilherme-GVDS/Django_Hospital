@@ -18,12 +18,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import homepage
-
+from .views import Homepage
+#from paciente.views import pacientes
+import paciente.views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', homepage),
+    path('', Homepage.as_view()),
     #path('paciente/', include('paciente.urls')),
+    path('paciente/<int:id>/', paciente.views.pacientes, name='pacientes'),
+    path('paciente/<int:id_paciente>/agendar/', paciente.views.agendar_consulta, name='agendar_consulta'),
+    path('paciente/<int:id_paciente>/consultas/', paciente.views.listar_consultas, name='consultas'),
+
+    
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

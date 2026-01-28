@@ -1,0 +1,331 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paciente - {{ paciente.nome_completo }}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .sidebar {
+            background: linear-gradient(180deg, #4CAF8F 0%, #3D9B7A 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+        
+        .profile-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #C85A54;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+        }
+        
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-circle i {
+            font-size: 3.5rem;
+            color: white;
+        }
+        
+        .sidebar-menu {
+            margin-top: 3rem;
+        }
+        
+        .menu-item {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 0.5rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+        }
+        
+        .menu-item:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .menu-item i {
+            font-size: 1.25rem;
+        }
+        
+        .header {
+            background: linear-gradient(90deg, #4A90A4 0%, #5BA3B8 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logout-btn {
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: white;
+            color: #4A90A4;
+        }
+        
+        .info-card {
+            border-radius: 10px;
+            padding: 2rem;
+            color: white;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-red {
+            background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%);
+        }
+        
+        .card-dark {
+            background: linear-gradient(135deg, #4A4A4A 0%, #2C2C2C 100%);
+        }
+        
+        .card-blue {
+            background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%);
+        }
+        
+        .card-olive {
+            background: linear-gradient(135deg, #7D8B3A 0%, #6B7830 100%);
+        }
+        
+        .card-icon {
+            width: 70px;
+            height: 70px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+        }
+        
+        .card-icon i {
+            font-size: 2rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .card-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .patient-name {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: white;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: #27AE60;
+            color: white;
+        }
+        
+        .status-inactive {
+            background-color: #E74C3C;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="sidebar" style="width: 240px;">
+            <!-- Profile Section -->
+            <div class="text-center">
+                <div class="profile-circle">
+                    {% if paciente.foto %}
+                        <img src="{{ paciente.foto.url }}" alt="Foto do paciente">
+                    {% else %}
+                        <i class="fas fa-user"></i>
+                    {% endif %}
+                </div>
+                <div class="patient-name">{{ paciente.nome_completo|truncatewords:2 }}</div>
+            </div>
+            
+            <!-- Menu -->
+            <div class="sidebar-menu">
+                <a href="#" class="menu-item">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span>Agendar Consulta</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fas fa-notes-medical"></i>
+                    <span>Consultas</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex-grow-1">
+            <!-- Header -->
+            <div class="header">
+                <h2 class="m-0">HOSPITAL MANAGEMENT</h2>
+                <a href="#" class="logout-btn">
+                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                </a>
+            </div>
+            
+            <!-- Content Area -->
+            <div class="container-fluid p-4">
+                <div class="row g-4">
+                    <!-- Card 1: Nome do Paciente -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="info-card card-red">
+                            <div>
+                                <div class="card-title">{{ paciente.nome_completo }}</div>
+                                <div class="card-subtitle">Nome do Paciente</div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-user" style="color: #E74C3C;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 2: Consulta Ativa -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="info-card card-dark">
+                            <div>
+                                {% if consulta_ativa %}
+                                    <div class="card-title">Consulta Agendada</div>
+                                    <span class="status-badge status-active">Ativa</span>
+                                {% else %}
+                                    <div class="card-title">Sem Consulta</div>
+                                    <span class="status-badge status-inactive">Inativa</span>
+                                {% endif %}
+                                <div class="card-subtitle mt-2">Status da Consulta</div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-info-circle" style="color: #4A4A4A;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Número de Celular -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="info-card card-blue">
+                            <div>
+                                <div class="card-title">
+                                    {% if paciente.celular|length == 11 %}
+                                        ({{ paciente.celular|slice:":2" }}) {{ paciente.celular|slice:"2:7" }}-{{ paciente.celular|slice:"7:" }}
+                                    {% else %}
+                                        ({{ paciente.celular|slice:":2" }}) {{ paciente.celular|slice:"2:6" }}-{{ paciente.celular|slice:"6:" }}
+                                    {% endif %}
+                                </div>
+                                <div class="card-subtitle">Contato</div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-mobile-alt" style="color: #3498DB;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 4: Endereço -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="info-card card-red">
+                            <div>
+                                <div class="card-title">CEP: {{ paciente.cep|slice:":5" }}-{{ paciente.cep|slice:"5:" }}</div>
+                                <div class="card-subtitle">Nº {{ paciente.numero }}</div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-map-marker-alt" style="color: #E74C3C;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 5: Data de Nascimento -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="info-card card-olive">
+                            <div>
+                                <div class="card-title">{{ paciente.data_nascimento|date:"d/m/Y" }}</div>
+                                <div class="card-subtitle">Data de Nascimento ({{ paciente.idade }} anos)</div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-calendar" style="color: #7D8B3A;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6: CPF (Extra) -->
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="info-card card-blue">
+                            <div>
+                                <div class="card-title">{{ paciente.cpf|slice:":3" }}.{{ paciente.cpf|slice:"3:6" }}.{{ paciente.cpf|slice:"6:9" }}-{{ paciente.cpf|slice:"9:" }}</div>
+                                <div class="card-subtitle">CPF</div>
+                            </div>
+                            <div class="card-icon">
+                                <i class="fas fa-id-card" style="color: #3498DB;"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
