@@ -19,8 +19,8 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from .views import Homepage
-#from paciente.views import pacientes
 import paciente.views
+import medico.views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Homepage.as_view()),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('paciente/<int:id>/', paciente.views.pacientes, name='pacientes'),
     path('paciente/<int:id_paciente>/agendar/', paciente.views.agendar_consulta, name='agendar_consulta'),
     path('paciente/<int:id_paciente>/consultas/', paciente.views.listar_consultas, name='consultas'),
+    path('medico/<int:id_medico>/', medico.views.medicos, name='medicos'),
 
     
 ]
