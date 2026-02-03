@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from datetime import date
-
+from django.templatetags.static import static
 
 class Paciente(models.Model):
 
@@ -13,8 +13,7 @@ class Paciente(models.Model):
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='paciente')
     nome_completo = models.CharField(max_length=200) 
-    foto= models.ImageField(upload_to='foto_perfil', blank=True, null=True,
-                            default='static/imagens/default-perfil.jpg')
+    foto= models.ImageField(upload_to='foto_perfil', blank=True, null=True)
     cpf = models.CharField(max_length=11, unique=True,
         validators=[RegexValidator(r'^\d{11}$', 'CPF deve conter 11 dígitos')]
     )
@@ -47,3 +46,9 @@ class Paciente(models.Model):
         return hoje.year - self.data_nascimento.year - (
             (hoje.month, hoje.day) < (self.data_nascimento.month, self.data_nascimento.day)
         )
+    
+    @property
+    def foto_url(self):
+       if self.foto:
+           return self.foto.url
+       return static('imagens/default-perfil.jpg')

@@ -195,11 +195,7 @@
             <!-- Profile Section -->
             <div class="text-center">
                 <div class="profile-circle">
-                    {% if paciente.foto %}
-                        <img src="{{ paciente.foto.url }}" alt="Foto do paciente">
-                    {% else %}
-                        <i class="fas fa-user"></i>
-                    {% endif %}
+                    <img src="{{ paciente.foto_url }}" alt="Foto do paciente">
                 </div>
                 <div class="patient-name">{{ paciente.nome_completo|truncatewords:2 }}</div>
             </div>
